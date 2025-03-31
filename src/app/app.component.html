@@ -1,0 +1,28 @@
+<div class="my-baby card">
+  <p-carousel 
+      [value]="images" 
+      [numVisible]="1" 
+      [numScroll]="1" 
+      [circular]="true"
+      [autoplayInterval]="4000"
+      [showIndicators]="false" 
+      [showNavigators]="false"
+      class="custom-carousel">
+      
+      <ng-template let-item pTemplate="item">
+        <div class="border-1 surface-border border-round p-3" style="text-align: center; margin: auto;">
+          <img 
+              [src]="'assets/images/' + item.img" 
+              [alt]="'Imagem do Carrossel'" 
+              width="250px"
+              height="440px"
+              class="w-full border-round shadow-2" />
+        </div>
+      </ng-template>
+  </p-carousel>
+
+  <div class="info">
+    <h4>❤️ Eu te amo há: ❤️</h4>
+    <p>{{ daysILover }}</p>
+  </div>
+</div>

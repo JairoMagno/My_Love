@@ -1,0 +1,25 @@
+.my-baby {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;
+    width: 100%;
+  }
+  
+  .custom-carousel {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  img {
+    height: auto;
+    border-radius: 15px;
+  }
+  
+  .info {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
