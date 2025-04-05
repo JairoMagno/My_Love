@@ -1,15 +1,14 @@
 import { TagModule } from 'primeng/tag';
+import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
-import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CarouselModule, ButtonModule, TagModule, MatDividerModule, NgxAudioPlayerModule, FormsModule],
+  imports: [CarouselModule, ButtonModule, TagModule, MatDividerModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,

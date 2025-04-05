@@ -17,9 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/minha_nene",
+            "outputPath": "docs",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            "baseHref": "/My_Love/",
             "polyfills": [
               "zone.js"
             ],
@@ -99,6 +100,9 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
