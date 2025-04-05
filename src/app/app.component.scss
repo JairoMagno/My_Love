@@ -1,3 +1,34 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* pega a altura total da tela */
+}
+
+.neon-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid #f0f;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.neon-button:hover {
+  transform: scale(1.05);
+  background-color: #7abbf0;
+}
+
+.emoji {
+  font-size: 1.5rem;
+}
+
 .my-baby {
     display: flex;
     flex-direction: column;
@@ -5,21 +36,102 @@
     justify-content: center; 
     text-align: center;
     width: 100%;
-  }
+    margin: auto;
+    max-width: 1000px;
+
+    .custom-carousel {
+      display: flex;
+      overflow-x: hidden;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    img {
+      height: auto;
+      border-radius: 15px;
+    }
+    
+    .info {
+      color: white;
+      text-align: center;
+    }
+
+    .text-for-her {
+      color: white;
+    }
+}
   
-  .custom-carousel {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+
+.compact-player {
+  display: flex;
+  align-items: center;
+  background-color: #0d1b2a;
+  color: #90caf9;
+  padding: 10px 15px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin: 20px auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  flex-shrink: 0;
+  border: 2px solid #90caf9;
+}
+
+.player-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type="range"] {
+  flex: 1;
+  accent-color: #90caf9;
+  height: 4px;
+}
+
+.time {
+  font-size: 10px;
+  min-width: 35px;
+  text-align: center;
+}
+
+.track-info {
+  font-size: 14px;
+  text-align: center;
+  color: #b0d0ff;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #90caf9;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ffffff;
   }
-  
-  img {
-    height: auto;
-    border-radius: 15px;
-  }
-  
-  .info {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
+}

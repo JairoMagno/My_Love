@@ -1,28 +1,78 @@
-<div class="my-baby card">
-  <p-carousel 
-      [value]="images" 
-      [numVisible]="1" 
-      [numScroll]="1" 
-      [circular]="true"
-      [autoplayInterval]="4000"
-      [showIndicators]="false" 
-      [showNavigators]="false"
-      class="custom-carousel">
-      
-      <ng-template let-item pTemplate="item">
-        <div class="border-1 surface-border border-round p-3" style="text-align: center; margin: auto;">
-          <img 
-              [src]="'assets/images/' + item.img" 
-              [alt]="'Imagem do Carrossel'" 
-              width="250px"
-              height="440px"
-              class="w-full border-round shadow-2" />
-        </div>
-      </ng-template>
-  </p-carousel>
-
-  <div class="info">
-    <h4>❤️ Eu te amo há: ❤️</h4>
-    <p>{{ daysILover }}</p>
-  </div>
+<div *ngIf="!info; else baby" class="button-container">
+  <button class="neon-button" (click)="showInfo()">
+    <span class="emoji">💝</span>
+    <span class="text">Clique</span>
+  </button>
 </div>
+
+<ng-template #baby>
+
+  <div class="compact-player">
+    <audio #audio (timeupdate)="updateProgress()" (loadedmetadata)="setDuration()">
+      <source [src]="audioSrc" type="audio/mpeg" />
+      Seu navegador não suporta áudio.
+    </audio>
+  
+    <img class="cover" [src]="coverSrc" alt="Capa da música" />
+  
+    <div class="player-right">
+      <div class="progress-container">
+        <span class="time">{{ formatTime(currentTime) }}</span>
+        <input
+          type="range"
+          min="0"
+          [max]="duration"
+          [(ngModel)]="currentTime"
+          (input)="seekAudio()"
+        />
+        <span class="time">{{ formatTime(duration) }}</span>
+      </div>
+  
+      <div class="track-info">{{ title }}</div>
+  
+      <div class="controls">
+        <button (click)="togglePlay()" style="font-weight: 15px;">
+          {{ isPlaying ? '⏸' : '▶️' }}
+        </button>
+      </div>
+    </div>
+  </div>  
+
+  <div class="my-baby card" style="padding: 15px;">
+    <p-carousel
+        [value]="images"
+        [numVisible]="1"
+        [numScroll]="1"
+        [circular]="true"
+        [autoplayInterval]="4000"
+        [showIndicators]="false"
+        [showNavigators]="false"
+        class="custom-carousel">
+  
+        <ng-template let-item pTemplate="item">
+          <div class="border-1 surface-border border-round p-3" style="text-align: center; margin: auto;">
+            <img
+                [src]="'assets/images/' + item.img"
+                [alt]="'Imagem do Carrossel'"
+                width="250px"
+                height="440px"
+                class="w-full border-round shadow-2" />
+          </div>
+        </ng-template>
+    </p-carousel>
+  
+    <div class="info">
+      <h4>❤️ Eu te amo há: ❤️</h4>
+      <p style="font-weight: 550;">{{ daysILover }}</p>
+    </div>
+  
+    <div class="text-for-her">
+      <mat-divider style="height: 1px; background-color: white; width: 100%;"></mat-divider>
+      <p style="text-align: justify;">
+        A cada dia que passa, meu coração se enche mais de carinho e adimiração por você. Cada sorriso seu ilumina o meu coração, e a cada abraço me faz sentir que estou exatamente onde deveria estar.
+        Você é a razão dos meus melhores pensamentos, e tudo ao seu lado se torna mais bonito e com significado.
+        Eu te amo para sempre 💗
+      </p>
+    </div>
+  </div>
+</ng-template>

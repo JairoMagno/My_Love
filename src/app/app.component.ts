@@ -1,17 +1,28 @@
 import { TagModule } from 'primeng/tag';
-import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
+import { Component, ElementRef, OnInit, Renderer2, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CarouselModule, ButtonModule, TagModule],
+  imports: [CarouselModule, ButtonModule, TagModule, MatDividerModule, NgxAudioPlayerModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit{
+  duration = 0;
+  currentTime = 0;
+  info: boolean = false;
   daysILover: string = "";
+  isPlaying: boolean = false;
+  title: string = 'You & I 💖';
+  coverSrc: string = 'assets/images/rhoades.jpg';
+  audioSrc: string = 'assets/songs/You & I.mp3';
   dateWeMet: Date = new Date("November 28, 2018 00:00:00");
   images: any[] = [
     { img: 'eu_e_nene_01.jpeg' },
@@ -19,8 +30,30 @@ export class AppComponent implements OnInit{
     { img: 'eu_e_nene_03.jpeg' }
   ];
 
+  audioList: any[] = [
+    {
+      link: "assets/songs/You & I.mp3",
+      title: "You & I",
+      cover: "assets/images/rhoades.jpg"
+    }
+
+  ];
+
+  @ViewChild('audio') audioRef!: ElementRef<HTMLAudioElement>;
+
+  constructor(private _renderer: Renderer2) {}
+
   ngOnInit(): void {
-    setInterval(() => this.calculateDaysILoveHer(), 1000); 
+    setInterval(() => {
+      this.calculateDaysILoveHer();
+    }, 1000); 
+  }
+
+  showInfo() {
+    this.info = true;
+    setInterval(() => {
+      this.fallingHearts();
+    }, 1000);
   }
 
   calculateDaysILoveHer() {
@@ -39,5 +72,45 @@ export class AppComponent implements OnInit{
                        `${formatUnit(hours, "hora", "horas")}, ` +
                        `${formatUnit(minutes, "minuto", "minutos")}, ` +
                        `${formatUnit(seconds, "segundo", "segundos")}`;
+  }
+
+  fallingHearts() {
+    const body = document.querySelector('body');
+    const text = this._renderer.createText('💗');
+    const heart = this._renderer.createElement('div');
+  
+    this._renderer.setStyle(heart, 'left', Math.random() * 100 + 'vw');
+    this._renderer.appendChild(heart, text);
+    this._renderer.appendChild(body, heart);
+    this._renderer.addClass(heart, 'fallingHearts');
+
+    setTimeout(() => {
+      this._renderer.removeChild(body, heart);
+    }, 6000);
+  }
+
+  togglePlay() {
+    const audio = this.audioRef.nativeElement;
+    this.isPlaying ? audio.pause() : audio.play();
+    this.isPlaying = !this.isPlaying;
+  }
+
+  updateProgress() {
+    const audio = this.audioRef.nativeElement;
+    this.currentTime = audio.currentTime;
+  }
+
+  setDuration() {
+    this.duration = this.audioRef.nativeElement.duration;
+  }
+
+  seekAudio() {
+    this.audioRef.nativeElement.currentTime = this.currentTime;
+  }
+
+  formatTime(seconds: number): string {
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
   }
 }
